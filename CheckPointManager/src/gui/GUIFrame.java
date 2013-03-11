@@ -8,7 +8,7 @@ public class GUIFrame extends JFrame {
 		this.setVisible(true);
 		GUIPanel panel = new GUIPanel(fileNames);
 		this.add(panel);
-		this.setSize(500, 500);
+		this.setSize(450, 350);
 	}
 
 }
