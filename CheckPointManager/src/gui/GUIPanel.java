@@ -19,9 +19,10 @@ public class GUIPanel extends JPanel  {
 	ReadEntrants readEntrants;
 	GUIList list;
 	JComboBox<String> checkPoints;
+	JComboBox<String> exclude;
+	JTextField node;
 	JTextField arrive;
 	JTextField depart;
-	JComboBox<String> exclude;
 	JButton submit;
 	WriteTime times;
 	Actions actions;
@@ -40,7 +41,7 @@ public class GUIPanel extends JPanel  {
 		eastPanel.setLayout(new GridLayout(2,1));
 		eastNorthPanel.setBackground(Color.WHITE);
 		eastSouthPanel.setBackground(Color.WHITE);
-		eastNorthPanel.setLayout(new GridLayout(5,2));
+		eastNorthPanel.setLayout(new GridLayout(6,2));
 		readEntrants = new ReadEntrants(fileNames[0]);
 		list = new GUIList(readEntrants.getEntrants());
 	    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -48,13 +49,17 @@ public class GUIPanel extends JPanel  {
 		String[] excludeStrings = { "Not Excluded", "Excluded" };
 		checkPoints = new JComboBox<String>(checkPointTypes);
 		//checkPoints.addActionListener(actions);
+		JLabel nodeLabel = new JLabel ("Select CheckPoint node: ");
 		JLabel checkLabel = new JLabel("Select CheckPoint Type: ");
 		JLabel arriveLabel = new JLabel("Input Arrival Time: ");
 		JLabel departLabel = new JLabel("Input Departing Time: ");
 		JLabel excludeLabel = new JLabel("Excluded?: ");
 		JLabel submitLabel = new JLabel("Press ToSubmit: ");
+		node = new JTextField("0");
 		arrive = new JTextField("00:00");
-		depart = new JTextField("00:00");
+		depart = new JTextField();
+		depart.setText("");
+		depart.setEditable(false);
 		exclude = new JComboBox<String>(excludeStrings);
 		submit = new JButton("Submit");
 		
@@ -62,6 +67,8 @@ public class GUIPanel extends JPanel  {
 		eastPanel.add(eastNorthPanel);
 		eastPanel.add(eastSouthPanel);
 		this.add(list, BorderLayout.WEST);
+		eastNorthPanel.add(nodeLabel);
+		eastNorthPanel.add(node);
 		eastNorthPanel.add(checkLabel);
 		eastNorthPanel.add(checkPoints);
 		eastNorthPanel.add(excludeLabel);
@@ -74,10 +81,15 @@ public class GUIPanel extends JPanel  {
 		eastNorthPanel.add(submit);
 		
 		times = new WriteTime(fileNames[1]);
-		actions = new Actions(getTimes(), getList(), getCheckPoints(), getArrive(), getDepart(), getExclude());
+		actions = new Actions(getTimes(),getNode(), getList(), getCheckPoints(), getArrive(), getDepart(), getExclude());
 //		checkPoints.addActionListener(this);
 //		exclude.addActionListener(this);
 		submit.addActionListener(actions);
+		checkPoints.addActionListener(actions);
+	}
+
+	public JTextField getNode() {
+		return node;
 	}
 
 	public ReadEntrants getReadEntrants() {
