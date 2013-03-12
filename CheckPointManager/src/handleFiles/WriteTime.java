@@ -25,13 +25,13 @@ public class WriteTime {
 		}
 	}
 
-	public void setData(List<String> entrant, String arrival, String departure,
-			String node, boolean excluded, boolean timeCheckpoint) {
+	public void setData(List<String> entrant, String node,String arrival, String departure,
+			 boolean excluded, boolean timeCheckpoint) {
+		this.node = node;
 		this.arrival = arrival;
 		this.departure = departure;
 		this.excluded = excluded;
 		this.timeCheckpoint = timeCheckpoint;
-		this.node = node;
 		try {
 			this.entrant = entrant.get(0);
 		} catch (IndexOutOfBoundsException e) {
