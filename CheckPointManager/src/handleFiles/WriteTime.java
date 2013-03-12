@@ -3,7 +3,7 @@ package handleFiles;
 public class WriteTime {
 	private String arrival, departure;
 	private boolean excluded, timeCheckpoint;
-	public WriteTime() {
+	public WriteTime(String fileNames) {
 		
 	}
 	
@@ -12,5 +12,12 @@ public class WriteTime {
 		this.departure = departure;
 		this.excluded = excluded;
 		this.timeCheckpoint = timeCheckpoint;
+	}
+	public void checkData() {
+		
+	}
+	
+	public void writeToFile(){
+		
 	}
 }

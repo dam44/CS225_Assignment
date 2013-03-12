@@ -38,6 +38,7 @@ public class Actions implements ActionListener {
 				times.setData(arrive.getText(), depart.getText(), true,false);
 			else if (excluded.getSelectedIndex()==0 && checkPoints.getSelectedIndex() == 1)
 				times.setData(arrive.getText(), depart.getText(), false, false);
+			else System.err.println("Error");
 		}
 
 	}

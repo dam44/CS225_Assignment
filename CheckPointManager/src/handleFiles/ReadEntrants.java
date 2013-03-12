@@ -8,16 +8,16 @@ import java.util.ArrayList;
 public class ReadEntrants {
 	String[] entrants;
 
-	public ReadEntrants(String[] fileNames) {
-		readIn(fileNames);
+	public ReadEntrants(String entrantsFile) {
+		readIn(entrantsFile);
 	}
 
-	public void readIn(String[] fileNames) {
+	public void readIn(String entrantsFile) {
 		String thisLine;
 		ArrayList<String> entrantsList = new ArrayList<String>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(
-					"src/handleFiles/" + fileNames[0]));
+					"src/handleFiles/" + entrantsFile));
 			while ((thisLine = br.readLine()) != null) {
 				entrantsList.add(thisLine);
 			}

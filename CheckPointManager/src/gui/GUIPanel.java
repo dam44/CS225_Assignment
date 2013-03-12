@@ -40,7 +40,7 @@ public class GUIPanel extends JPanel  {
 		eastNorthPanel.setBackground(Color.WHITE);
 		eastSouthPanel.setBackground(Color.WHITE);
 		eastNorthPanel.setLayout(new GridLayout(5,2));
-		readEntrants = new ReadEntrants(fileNames);
+		readEntrants = new ReadEntrants(fileNames[0]);
 		list = new GUIList(readEntrants.getEntrants());
 		String[] checkPointTypes = { "Time", "Medical" };
 		String[] excludeStrings = { "Not Excluded", "Excluded" };
@@ -71,7 +71,7 @@ public class GUIPanel extends JPanel  {
 		eastNorthPanel.add(submitLabel);
 		eastNorthPanel.add(submit);
 		
-		times = new WriteTime();
+		times = new WriteTime(fileNames[1]);
 		actions = new Actions(getTimes(), getList(), getCheckPoints(), getArrive(), getDepart(), getExclude());
 //		checkPoints.addActionListener(this);
 //		exclude.addActionListener(this);
