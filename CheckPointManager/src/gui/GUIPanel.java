@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUIPanel extends JPanel implements ActionListener  {
+public class GUIPanel extends JPanel  {
 	ReadEntrants readEntrants;
 	GUIList list;
 	JComboBox<String> checkPoints;
@@ -22,6 +22,8 @@ public class GUIPanel extends JPanel implements ActionListener  {
 	JTextField depart;
 	JComboBox<String> exclude;
 	JButton submit;
+	WriteTime times;
+	Actions actions;
 	public GUIPanel(String[] fileNames) {
 		init(fileNames);
 	}
@@ -43,7 +45,7 @@ public class GUIPanel extends JPanel implements ActionListener  {
 		String[] checkPointTypes = { "Time", "Medical" };
 		String[] excludeStrings = { "Not Excluded", "Excluded" };
 		checkPoints = new JComboBox<String>(checkPointTypes);
-		checkPoints.addActionListener(this);
+		//checkPoints.addActionListener(actions);
 		JLabel checkLabel = new JLabel("Select CheckPoint Type: ");
 		JLabel arriveLabel = new JLabel("Input Arrival Time: ");
 		JLabel departLabel = new JLabel("Input Departing Time: ");
@@ -69,13 +71,47 @@ public class GUIPanel extends JPanel implements ActionListener  {
 		eastNorthPanel.add(submitLabel);
 		eastNorthPanel.add(submit);
 		
-		checkPoints.addActionListener(this);
-		exclude.addActionListener(this);
-		submit.addActionListener(this);
+		times = new WriteTime();
+		actions = new Actions(getTimes(), getList(), getCheckPoints(), getArrive(), getDepart(), getExclude());
+//		checkPoints.addActionListener(this);
+//		exclude.addActionListener(this);
+		submit.addActionListener(actions);
 	}
-	
-	public void actionPerformed(ActionEvent event) {
-		
+
+	public ReadEntrants getReadEntrants() {
+		return readEntrants;
+	}
+
+	public GUIList getList() {
+		return list;
+	}
+
+	public JComboBox<String> getCheckPoints() {
+		return checkPoints;
+	}
+
+	public JTextField getArrive() {
+		return arrive;
+	}
+
+	public JTextField getDepart() {
+		return depart;
+	}
+
+	public JComboBox<String> getExclude() {
+		return exclude;
+	}
+
+	public JButton getSubmit() {
+		return submit;
+	}
+
+	public WriteTime getTimes() {
+		return times;
+	}
+
+	public Actions getActions() {
+		return actions;
 	}
 	
 	
