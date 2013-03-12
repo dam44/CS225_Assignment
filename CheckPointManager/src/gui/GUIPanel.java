@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 public class GUIPanel extends JPanel  {
 	ReadEntrants readEntrants;
@@ -42,6 +43,7 @@ public class GUIPanel extends JPanel  {
 		eastNorthPanel.setLayout(new GridLayout(5,2));
 		readEntrants = new ReadEntrants(fileNames[0]);
 		list = new GUIList(readEntrants.getEntrants());
+	    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		String[] checkPointTypes = { "Time", "Medical" };
 		String[] excludeStrings = { "Not Excluded", "Excluded" };
 		checkPoints = new JComboBox<String>(checkPointTypes);

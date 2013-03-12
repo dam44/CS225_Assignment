@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JList;
 
-public class GUIList extends JList {
+public class GUIList extends JList<String> {
 
 
 	public GUIList(String[] values) {
