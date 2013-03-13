@@ -16,17 +16,22 @@ public class WriteTime {
 	private FileWriter fw;
 	private BufferedWriter bw;
 	private String writeThis;
+	private String courses;
+	private String entrantCourse;
 
-	public WriteTime(String fileNames) {
+	public WriteTime(String[] fileNames) {
+		courses = fileNames[2];
 	}
 
 	public void setData(List<String> entrant, String node,String arrival, String departure,
-			 boolean excluded, boolean timeCheckpoint) {
+			 int exclude, int checkpoints) {
 		this.node = node;
 		this.arrival = arrival;
 		this.departure = departure;
-		this.excluded = excluded;
-		this.timeCheckpoint = timeCheckpoint;
+		if (exclude == 0) this.excluded = false;
+		else this.excluded = true;
+		if (checkpoints == 0) this.timeCheckpoint = true;
+		else this.timeCheckpoint = false;
 		try {
 			this.entrant = entrant.get(0);
 			checkData();
@@ -35,7 +40,7 @@ public class WriteTime {
 		}
 	}
 
-	public void checkData() {
+	private void checkData() {
 		if (departure.equals("")) {
 			if ((arrival.matches("\\d\\d:\\d\\d"))) {
 				if (parseNode() != -1){
@@ -46,14 +51,14 @@ public class WriteTime {
 		} else {
 			if ((arrival.matches("\\d\\d:\\d\\d"))
 					&& (departure.matches("\\d\\d:\\d\\d"))) {
-				if (parseNode() != 0)
+				if (parseNode() != -1)
 				writeToFile();
 			} else
 				System.err.println("Error arrival or departure time is not in correct format");
 		}
 	}
 
-	public int parseNode() {
+	private int parseNode() {
 		try {
 		nodeNum = Integer.parseInt(node);
 		return nodeNum;
@@ -64,20 +69,25 @@ public class WriteTime {
 		}
 	}
 	
-	public int parseEntrantNum() {
+	private int parseEntrantNum() {
 		Matcher matcher = Pattern.compile("\\d+").matcher(entrant);
 		matcher.find();
 		return Integer.valueOf(matcher.group());
 	}
 	
-	public void formatInToString() {
+	private void formatInToString() {
+		System.out.println(timeCheckpoint);
 		if (timeCheckpoint == true) {
 			writeThis = "T "+nodeNum+" "+parseEntrantNum()+" "+arrival;
-			System.out.println(writeThis);
+		}
+		else if (timeCheckpoint == false) {
+			Matcher matcher = Pattern.compile("[A-Z]+").matcher(entrant);
+			matcher.find();
+			entrantCourse = matcher.group();
 		}
 	}
 
-	public void writeToFile() {
+	private void writeToFile() {
 		formatInToString();
 		try {
 		timesFile = new File("src/handleFiles/times.txt");

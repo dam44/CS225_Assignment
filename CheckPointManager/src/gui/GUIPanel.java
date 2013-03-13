@@ -80,7 +80,7 @@ public class GUIPanel extends JPanel  {
 		eastNorthPanel.add(submitLabel);
 		eastNorthPanel.add(submit);
 		
-		times = new WriteTime(fileNames[1]);
+		times = new WriteTime(fileNames);
 		actions = new Actions(getTimes(),getNode(), getList(), getCheckPoints(), getArrive(), getDepart(), getExclude());
 		submit.addActionListener(actions);
 		checkPoints.addActionListener(actions);
