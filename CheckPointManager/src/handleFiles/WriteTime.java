@@ -2,8 +2,11 @@ package handleFiles;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.channels.FileLock;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +18,9 @@ public class WriteTime {
 	private File timesFile;
 	private FileWriter fw;
 	private BufferedWriter bw;
+	private FileLock fl;
+	private FileOutputStream fos;
+	private OutputStreamWriter writer;
 	private String writeThis;
 	private String[] courses;
 	private String entrantCourse;
@@ -124,16 +130,19 @@ public class WriteTime {
 		formatInToString();
 		try {
 			timesFile = new File("src/handleFiles/" + times);
-			fw = new FileWriter(timesFile.getAbsoluteFile(), true);
-			bw = new BufferedWriter(fw);
 			if (!timesFile.exists()) {
 				timesFile.createNewFile();
 			}
-
-			bw.write(writeThis);
-			bw.newLine();
-			bw.close();
-
+			fos = new FileOutputStream(timesFile, true);
+			writer = new OutputStreamWriter(fos, "UTF-8");
+			fl = fos.getChannel().tryLock();
+			if (fl != null) {
+				bw = new BufferedWriter(writer);
+				bw.write(writeThis);
+				bw.newLine();
+				fl.release();
+				bw.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
