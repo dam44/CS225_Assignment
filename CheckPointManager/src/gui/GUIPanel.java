@@ -17,6 +17,7 @@ import javax.swing.ListSelectionModel;
 
 public class GUIPanel extends JPanel  {
 	ReadEntrants readEntrants;
+	ReadCourses readCourses;
 	GUIList list;
 	JComboBox<String> checkPoints;
 	JComboBox<String> exclude;
@@ -43,6 +44,7 @@ public class GUIPanel extends JPanel  {
 		eastSouthPanel.setBackground(Color.WHITE);
 		eastNorthPanel.setLayout(new GridLayout(6,2));
 		readEntrants = new ReadEntrants(fileNames[0]);
+		readCourses = new ReadCourses(fileNames[2]);
 		list = new GUIList(readEntrants.getEntrants());
 	    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		String[] checkPointTypes = { "Time", "Medical" };
@@ -80,7 +82,7 @@ public class GUIPanel extends JPanel  {
 		eastNorthPanel.add(submitLabel);
 		eastNorthPanel.add(submit);
 		
-		times = new WriteTime(fileNames);
+		times = new WriteTime(fileNames[1],readCourses.getCourses());
 		actions = new Actions(getTimes(),getNode(), getList(), getCheckPoints(), getArrive(), getDepart(), getExclude());
 		submit.addActionListener(actions);
 		checkPoints.addActionListener(actions);

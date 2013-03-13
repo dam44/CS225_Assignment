@@ -16,11 +16,13 @@ public class WriteTime {
 	private FileWriter fw;
 	private BufferedWriter bw;
 	private String writeThis;
-	private String courses;
+	private String[] courses;
 	private String entrantCourse;
+	private String times;
 
-	public WriteTime(String[] fileNames) {
-		courses = fileNames[2];
+	public WriteTime(String times, String[] strings) {
+		courses = strings;
+		this.times = times;
 	}
 
 	public void setData(List<String> entrant, String node,String arrival, String departure,
@@ -76,7 +78,6 @@ public class WriteTime {
 	}
 	
 	private void formatInToString() {
-		System.out.println(timeCheckpoint);
 		if (timeCheckpoint == true) {
 			writeThis = "T "+nodeNum+" "+parseEntrantNum()+" "+arrival;
 		}
@@ -84,26 +85,33 @@ public class WriteTime {
 			Matcher matcher = Pattern.compile("[A-Z]+").matcher(entrant);
 			matcher.find();
 			entrantCourse = matcher.group();
+			for (int i = 0; i<courses.length; i++) {
+				for (int j =0; j<courses[i].length(); j++) {	
+					if (String.valueOf(courses[i].charAt(j)).equals(entrantCourse)) {
+						
+					}
+				}
+			}
 		}
 	}
 
 	private void writeToFile() {
 		formatInToString();
-		try {
-		timesFile = new File("src/handleFiles/times.txt");
-		fw = new FileWriter(timesFile.getAbsoluteFile(), true);
-		bw = new BufferedWriter(fw);
-			if (!timesFile.exists()) {
-				timesFile.createNewFile();
-			}
-			
-			bw.write(writeThis);
-			bw.newLine();
-			bw.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+//		try {
+//		timesFile = new File("src/handleFiles/"+times);
+//		fw = new FileWriter(timesFile.getAbsoluteFile(), true);
+//		bw = new BufferedWriter(fw);
+//			if (!timesFile.exists()) {
+//				timesFile.createNewFile();
+//			}
+//			
+//			bw.write(writeThis);
+//			bw.newLine();
+//			bw.close();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
 	}
 }
