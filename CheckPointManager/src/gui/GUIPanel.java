@@ -82,8 +82,6 @@ public class GUIPanel extends JPanel  {
 		
 		times = new WriteTime(fileNames[1]);
 		actions = new Actions(getTimes(),getNode(), getList(), getCheckPoints(), getArrive(), getDepart(), getExclude());
-//		checkPoints.addActionListener(this);
-//		exclude.addActionListener(this);
 		submit.addActionListener(actions);
 		checkPoints.addActionListener(actions);
 	}

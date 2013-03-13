@@ -29,10 +29,10 @@ public class WriteTime {
 		this.timeCheckpoint = timeCheckpoint;
 		try {
 			this.entrant = entrant.get(0);
+			checkData();
 		} catch (IndexOutOfBoundsException e) {
 			System.err.println("Error no entrant selected");
 		}
-		checkData();
 	}
 
 	public void checkData() {
@@ -67,7 +67,6 @@ public class WriteTime {
 	public int parseEntrantNum() {
 		Matcher matcher = Pattern.compile("\\d+").matcher(entrant);
 		matcher.find();
-		System.out.println(Integer.valueOf(matcher.group()));
 		return Integer.valueOf(matcher.group());
 	}
 	
