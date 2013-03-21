@@ -5,13 +5,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Reads the entrants file to retrieve the entrants.
+ * @author Dan
+ *
+ */
 public class ReadEntrants {
 	String[] entrants;
 
+	/**
+	 * ReadEntrants constructor.
+	 * @param entrantsFile
+	 */
 	public ReadEntrants(String entrantsFile) {
 		readIn(entrantsFile);
 	}
 
+	/**
+	 * Reads the entrants file in. Adds the entrants to array list.
+	 * @param entrantsFile
+	 */
 	public void readIn(String entrantsFile) {
 		String thisLine;
 		ArrayList<String> entrantsList = new ArrayList<String>();

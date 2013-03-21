@@ -12,9 +12,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-
+/**
+ * Creates the JPanel and creates and holds components.
+ * @author Dan
+ *
+ */
 public class GUIPanel extends JPanel  {
 	ReadEntrants readEntrants;
 	ReadCourses readCourses;
@@ -27,10 +32,18 @@ public class GUIPanel extends JPanel  {
 	JButton submit;
 	WriteTime times;
 	Actions actions;
+	JScrollPane scrollPane;
+	/**
+	 * Constructor for GUIPanel. Calls the init (initialize) method.
+	 * @param fileNames
+	 */
 	public GUIPanel(String[] fileNames) {
 		init(fileNames);
 	}
-	
+	/**
+	 * Creates, holds an lays components out for the GUI.
+	 * @param fileNames
+	 */
 	public void init(String[] fileNames) {
 		this.setSize(500, 500);
 		this.setVisible(true);
@@ -46,7 +59,6 @@ public class GUIPanel extends JPanel  {
 		readEntrants = new ReadEntrants(fileNames[0]);
 		readCourses = new ReadCourses(fileNames[2]);
 		list = new GUIList(readEntrants.getEntrants());
-	    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		String[] checkPointTypes = { "Time", "Medical" };
 		String[] excludeStrings = { "Not Excluded", "Excluded" };
 		checkPoints = new JComboBox<String>(checkPointTypes);
@@ -64,11 +76,12 @@ public class GUIPanel extends JPanel  {
 		depart.setEditable(false);
 		exclude = new JComboBox<String>(excludeStrings);
 		submit = new JButton("Submit");
+		scrollPane = new JScrollPane(list);
 		
 		this.add(eastPanel, BorderLayout.CENTER);
 		eastPanel.add(eastNorthPanel);
 		eastPanel.add(eastSouthPanel);
-		this.add(list, BorderLayout.WEST);
+		this.add(scrollPane, BorderLayout.WEST);
 		eastNorthPanel.add(nodeLabel);
 		eastNorthPanel.add(node);
 		eastNorthPanel.add(checkLabel);

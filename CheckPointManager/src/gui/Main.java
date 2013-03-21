@@ -3,7 +3,7 @@ package gui;
 public class Main {
 
 	/**
-	 * 
+	 * Main method, creates the GUIFrame.
 	 * @param fileNames
 	 */
 	public static void main(String[] fileNames) {

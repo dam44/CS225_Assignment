@@ -11,6 +11,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Write time class constructs times strings and writes them to file.
+ * 
+ * @author Dan
+ * 
+ */
 public class WriteTime {
 	private String arrival, departure, entrant, node;
 	private boolean excluded, timeCheckpoint;
@@ -27,11 +33,27 @@ public class WriteTime {
 	private String times;
 	private String[] myCourse;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param times
+	 * @param strings
+	 */
 	public WriteTime(String times, String[] strings) {
 		courses = strings;
 		this.times = times;
 	}
 
+	/**
+	 * Retrieves an formats data.
+	 * 
+	 * @param entrant
+	 * @param node
+	 * @param arrival
+	 * @param departure
+	 * @param exclude
+	 * @param checkpoints
+	 */
 	public void setData(List<String> entrant, String node, String arrival,
 			String departure, int exclude, int checkpoints) {
 		this.node = node;
@@ -53,6 +75,9 @@ public class WriteTime {
 		}
 	}
 
+	/**
+	 * Uses regex to check data is legal.
+	 */
 	private void checkData() {
 		if (departure.equals("")) {
 			if ((arrival.matches("\\d\\d:\\d\\d"))) {
@@ -73,6 +98,10 @@ public class WriteTime {
 		}
 	}
 
+	/**
+	 * Turns node into an integer.
+	 * @return
+	 */
 	private int parseNode() {
 		try {
 			nodeNum = Integer.parseInt(node);
@@ -82,13 +111,19 @@ public class WriteTime {
 			return -1;
 		}
 	}
-
+	/**
+	 * Turns entrant number into an integer.
+	 * @return
+	 */
 	private int parseEntrantNum() {
 		Matcher matcher = Pattern.compile("\\d+").matcher(entrant);
 		matcher.find();
 		return Integer.valueOf(matcher.group());
 	}
 
+	/**
+	 * Formats data into a string ready to be written to a file.
+	 */
 	private void formatInToString() {
 		boolean found = false;
 		Matcher matcher = Pattern.compile("[A-Z]+").matcher(entrant);
@@ -126,6 +161,9 @@ public class WriteTime {
 		}
 	}
 
+	/**
+	 * Writes string to a file. Uses file locking to lock the file whilst data is being written to.
+	 */
 	private void writeToFile() {
 		formatInToString();
 		try {

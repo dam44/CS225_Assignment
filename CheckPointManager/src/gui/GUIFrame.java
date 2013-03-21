@@ -1,7 +1,11 @@
 package gui;
 
 import javax.swing.JFrame;
-
+/**
+ * Extends JFrame, creates the gui panel.
+ * @author Dan
+ *
+ */
 public class GUIFrame extends JFrame {
 
 	public GUIFrame(String[] fileNames) {

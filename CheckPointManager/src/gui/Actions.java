@@ -8,7 +8,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-
+/**
+ * contains action listener methods for the gui.
+ * @author Dan
+ *
+ */
 public class Actions implements ActionListener {
 	WriteTime times;
 	GUIList list;
@@ -18,7 +22,10 @@ public class Actions implements ActionListener {
 	JComboBox<String> excluded;
 	JButton submit;
 	JTextField node;
-
+	/**
+	 * Actions class constructor, gui components are passed to class.
+	 * 
+	 */
 	public Actions(WriteTime times, JTextField node, GUIList entrantList,
 			JComboBox<String> checkPoints, JTextField arrive,
 			JTextField depart, JComboBox<String> excluded) {
@@ -31,8 +38,12 @@ public class Actions implements ActionListener {
 		this.node = node;
 	}
 
+	/**
+	 * Deals with component actions and passes them to the WriteTime class object.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		//Handles the submit button actions.
 		if (event.getActionCommand().equals("Submit")) {
 			times.setData(list.getSelectedValuesList(), node.getText(),
 					arrive.getText(), depart.getText(),
